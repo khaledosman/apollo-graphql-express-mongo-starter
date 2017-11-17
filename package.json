@@ -21,6 +21,11 @@
     "babel-preset-env": "^1.6.1",
     "nodemon": "^1.12.1"
   },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
   "scripts": {
     "start": "nodemon ./server.js --exec babel-node"
   },
