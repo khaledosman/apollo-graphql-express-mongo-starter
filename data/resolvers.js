@@ -8,18 +8,18 @@ import { FortuneCookie } from '../model/fortune-cookie'
 
 const resolvers = {
   Query: {
-    author (_, args) {
+    author (parent, args) {
       return Author.find({ firstName: args.firstName, lastName: args.lastName}).then(results => Promise.resolve(results[0]))
     },
-    allAuthors (_, args) {
+    allAuthors (parent, args) {
       return Author.find({})
     },
-    getFortuneCookie (_, args) {
+    getFortuneCookie (parent, args) {
       return FortuneCookie.getOne()
     }
   },
   Mutation: {
-    createPost (_, {input}) {
+    createPost (parent, {input}) {
       return new Post(input).save().then((post) => {
         pubsub.publish('postAdded', { postAdded: post})
         return Promise.resolve(post)

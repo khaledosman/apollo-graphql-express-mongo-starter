@@ -1,4 +1,3 @@
-// at the top with imports:
 import Mongoose from 'mongoose'
 import casual from 'casual'
 import _ from 'lodash'
@@ -6,7 +5,6 @@ import { Author } from './model/author'
 import { Post } from './model/post'
 import { View } from './model/view'
 
-// somewhere in the middle:
 Mongoose.Promise = global.Promise
 
 const mongo = Mongoose.connect(`mongodb://test:123@graphql-poc-shard-00-00-trxb2.mongodb.net:27017,graphql-poc-shard-00-01-trxb2.mongodb.net:27017,graphql-poc-shard-00-02-trxb2.mongodb.net:27017/test?ssl=true&replicaSet=GraphQL-POC-shard-0&authSource=admin`, { })
@@ -29,8 +27,6 @@ db.once('open', () => {
     console.log('Views removed')
   })
 
-  // modify the mock data creation to also create some views:
-  // create mock data with a seed, so we always get the same
   _.times(10, () => {
     return new Author({
       firstName: casual.first_name,
@@ -52,7 +48,6 @@ db.once('open', () => {
       console.log('ERROR: ', e)
     })
   })
-  // .then(results => console.log(results))
 })
 
 export { db }
