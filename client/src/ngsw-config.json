@@ -1,0 +1,41 @@
+{
+  "appData": "1.0.0",
+  "index": "/index.html",
+  "assetGroups": [{
+    "name": "app",
+    "installMode": "prefetch",
+    "resources": {
+      "files": [
+        "/favicon.ico",
+        "/index.html"
+      ],
+      "versionedFiles": [
+        "/*.bundle.css",
+        "/*.bundle.js",
+        "/*.chunk.js"
+      ]
+    }
+  }, {
+    "name": "assets",
+    "installMode": "lazy",
+    "updateMode": "prefetch",
+    "resources": {
+      "files": [
+        "/assets/**"
+      ]
+    }
+  }],
+  "dataGroups": [{
+    "name":"dynamicEndpoints",
+    "urls": [
+      "**/graphql"
+    ],
+    "version": 0,
+    "cacheConfig": {
+      "maxSize": "",
+      "maxAge": "1d"
+    },
+    "timeout": "4s",
+    "strategy": "performance"
+  }]
+}
