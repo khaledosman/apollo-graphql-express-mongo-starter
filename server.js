@@ -2,7 +2,7 @@ import express from 'express'
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
 import bodyParser from 'body-parser'
 import compression from 'compression'
-import { Engine } from 'apollo-engine'
+import { ApolloEngine  } from 'apollo-engine'
 import { execute, subscribe } from 'graphql'
 import { db } from './connectors'
 import { createServer } from 'http'
@@ -15,27 +15,11 @@ const SUBSCRIPTIONS_PORT = GRAPHQL_PORT + 1
 const ENGINE_API_KEY = 'service:khaledosman-6497:HWtZojohT6hsLfni36q2gQ'
 
 const app = express()
-const engine = new Engine({
-  engineConfig: {
-    apiKey: ENGINE_API_KEY,
-    stores: [
-      {
-        name: 'inMemEmbeddedCache',
-        inMemory: {
-          cacheSize: 20971520 // 20 MB
-        }
-      }
-    ],
-    queryCache: {
-      publicFullQueryStore: 'inMemEmbeddedCache'
-    }
-  },
-  graphqlPort: GRAPHQL_PORT
+
+const engine = new ApolloEngine({
+  apiKey: ENGINE_API_KEY
 })
 
-engine.start()
-
-app.use(engine.expressMiddleware())
 app.use(compression())
 app.use('/graphql', bodyParser.json(), graphqlExpress({ schema, tracing: true, cacheControl: true }))
 app.use('/graphiql', graphiqlExpress({
@@ -61,6 +45,14 @@ websocketServer.listen(SUBSCRIPTIONS_PORT, () => {
   })
 })
 
-app.listen(GRAPHQL_PORT, () =>
+
+engine.listen({
+  port: GRAPHQL_PORT,
+  graphqlPaths: ['/api/graphql'],
+  expressApp: app,
+  launcherOptions: {
+    startupTimeout: 3000,
+  },
+}, () => {
   console.log(`GraphiQL is now running on http://localhost:${GRAPHQL_PORT}/graphiql`)
-)
+})
