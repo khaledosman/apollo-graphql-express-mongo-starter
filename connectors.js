@@ -17,15 +17,15 @@ db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', () => {
   console.log('connected to mongo successfully')
 
-  Author.remove({}, err => {
+  Author.deleteMany({}, err => {
     console.log('Authors removed')
   })
 
-  Post.remove({}, err => {
+  Post.deleteMany({}, err => {
     console.log('Posts removed')
   })
 
-  View.remove({}, err => {
+  View.deleteMany({}, err => {
     console.log('Views removed')
   })
 
@@ -42,7 +42,7 @@ db.once('open', () => {
     })
       .then(post => {
         // create some View mocks
-        return View.update(
+        return View.updateMany(
           { postId: post._id },
           { views: casual.integer(0, 100) },
           { upsert: true })
