@@ -1,15 +1,15 @@
-import { PubSub } from 'graphql-subscriptions'
-const pubsub = new PubSub()
-
+import { PubSub } from 'apollo-server-express'
 import { Author } from '../model/author'
 import { View } from '../model/view'
 import { Post } from '../model/post'
 import { FortuneCookie } from '../model/fortune-cookie'
 
+const pubsub = new PubSub()
+
 const resolvers = {
   Query: {
     author (parent, args) {
-      return Author.find({ firstName: args.firstName, lastName: args.lastName}).then(results => Promise.resolve(results[0]))
+      return Author.find({ firstName: args.firstName, lastName: args.lastName }).then(results => Promise.resolve(results[0]))
     },
     allAuthors (parent, args) {
       return Author.find({})
@@ -19,21 +19,21 @@ const resolvers = {
     }
   },
   Mutation: {
-    createPost (parent, {input}) {
+    createPost (parent, { input }) {
       return new Post(input).save().then((post) => {
-        pubsub.publish('postAdded', { postAdded: post})
+        pubsub.publish('postAdded', { postAdded: post })
         return Promise.resolve(post)
       })
     }
   },
   Subscription: {
     postAdded: {
-      subscribe: () => pubsub.asyncIterator('postAdded')
+      subscribe: () => pubsub.asyncIterator(['postAdded'])
     }
   },
   Author: {
     posts (author) {
-      return Post.find({author: author})
+      return Post.find({ author: author })
     },
     id (author) {
       return author.id

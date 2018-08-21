@@ -1,12 +1,13 @@
 import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools'
 import resolvers from './resolvers'
+import { gql } from 'apollo-server-express'
 import mocks from './mocks'
 
-const typeDefs = `
+const typeDefs = gql`
 type Query {
   author(firstName: String, lastName: String): Author
   allAuthors: [Author]
-  getFortuneCookie: String @cacheControl(maxAge: 5)
+  getFortuneCookie: String @cacheControl(maxAge: 100)
 }
 
 type Subscription {
@@ -43,4 +44,4 @@ const schema = makeExecutableSchema({ typeDefs, resolvers })
 
 // addMockFunctionsToSchema({ schema, mocks })
 
-export default schema
+export {schema, typeDefs}
