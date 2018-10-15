@@ -7,7 +7,7 @@ const typeDefs = gql`
 type Query {
   author(firstName: String, lastName: String): Author
   allAuthors: [Author]
-  getFortuneCookie: String @cacheControl(maxAge: 100)
+  getFortuneCookie: String #@cacheControl(maxAge: 100)
 }
 
 type Subscription {
@@ -44,4 +44,4 @@ const schema = makeExecutableSchema({ typeDefs, resolvers })
 
 // addMockFunctionsToSchema({ schema, mocks })
 
-export {schema, typeDefs}
+export { schema, typeDefs }

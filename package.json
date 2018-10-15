@@ -4,19 +4,19 @@
   "description": "Starting point for the Apollo GraphQL Server tutorial.",
   "main": "server.js",
   "dependencies": {
-    "apollo-server-express": "^2.0.4",
+    "apollo-server-express": "^2.1.0",
     "casual": "^1.5.19",
     "compression": "^1.7.3",
-    "express": "^4.16.3",
-    "graphql": "^0.13.2",
-    "lodash": "^4.17.10",
-    "mongoose": "^5.2.9",
+    "express": "^4.16.4",
+    "graphql": "^14.0.2",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.3.3",
     "node-fetch": "^2.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "nodemon": "^1.18.3"
+    "nodemon": "^1.18.4"
   },
   "babel": {
     "presets": [
