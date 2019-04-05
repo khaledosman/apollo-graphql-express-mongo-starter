@@ -1,9 +1,12 @@
+import dotenv from 'dotenv'
 import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
 import compression from 'compression'
 import { schema } from './data/schema'
 import { db } from './connectors'
-const ENGINE_API_KEY = 'service:khaledosman-6497:HWtZojohT6hsLfni36q2gQ'
+dotenv.config()
+// require('dotenv').config()
+const ENGINE_API_KEY = process.env.ENGINE_API_KEY
 
 const app = express()
 app.use(compression())

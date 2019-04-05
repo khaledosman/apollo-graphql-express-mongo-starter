@@ -18,14 +18,17 @@ db.once('open', () => {
   console.log('connected to mongo successfully')
 
   Author.deleteMany({}, err => {
+    err && console.error(err)
     console.log('Authors removed')
   })
 
   Post.deleteMany({}, err => {
+    err && console.error(err)
     console.log('Posts removed')
   })
 
   View.deleteMany({}, err => {
+    err && console.error(err)
     console.log('Views removed')
   })
 
