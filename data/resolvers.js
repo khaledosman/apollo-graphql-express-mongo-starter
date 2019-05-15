@@ -14,7 +14,8 @@ const resolvers = {
     allAuthors (parent, args) {
       return Author.find({})
     },
-    getFortuneCookie (parent, args) {
+    getFortuneCookie (parent, args, _, info) {
+      // info.cacheControl.setCacheHint({ maxAge: 60, scope: 'PRIVATE' })
       return FortuneCookie.getOne()
     }
   },
