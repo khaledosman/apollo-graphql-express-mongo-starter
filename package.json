@@ -26,7 +26,8 @@
     ]
   },
   "scripts": {
-    "start": "nodemon ./server.js --exec babel-node --inspect"
+    "start": "nodemon ./server.js --exec babel-node --inspect",
+    "test": "exit 0"
   },
   "repository": {
     "type": "git",
