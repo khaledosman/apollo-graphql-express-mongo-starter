@@ -1,5 +1,7 @@
 # apollo-tutorial-kit
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/khaledosman/apollo-graphql-express-mongo-starter.svg)](https://greenkeeper.io/)
+
 Initial starter project for a nodeJS Express app using MongoDB Atlas, Apollo, GraphQL, Apollo Engine, Casual for mocking and Express. Dummy query, mutations, subscriptions and mocks implemented.
 
 ## Features
